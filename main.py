@@ -74,8 +74,8 @@ def update_task(url, path):
 @app.route('/')
 def run_updates():
     for task in tasks:
-        threading.Thread(target=update_task, args=(task['url'], task['path'])).start()
-    return 'All 3 updates triggered!'
+        update_task(task['url'], task['path'])  # no threading
+    return 'All 3 updates triggered (sequentially)!'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
